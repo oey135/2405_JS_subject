@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25. json객체</title>
+</head>
+
+<body>
+    <script>
+        let person = {
+            name: "이건우",
+            age: 18,
+            tel: "010-111-2222",
+            adress: "신림동"
+        }
+        console.log(person);
+
+        let jsonStr = JSON.stringify(person);
+        console.log(jsonStr);
+
+        let arr = [1, 2, 3, 4];
+        console.log(arr);
+
+        let jsonStr2 = JSON.stringify(arr); // toString과 같게 됌
+        console.log(jsonStr2);
+
+        let jsonParse = JSON.parse(jsonStr);
+        console.log(jsonParse);
+
+        let jsonParse2 = JSON.parse(jsonStr2);
+        console.log(jsonParse2);
+
+    </script>
+</body>
+
+</html>

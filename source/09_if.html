@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. 조건문</title>
+</head>
+
+<body>
+    <script>
+        /*
+        6세 이하 : 무료
+        12세 미만 : 450
+        18세 미만 : 700
+        18세 이상 : 1000
+        70세 이상 : 무료(노인)
+        */
+        let age = prompt("나이를 입력해주세요.");
+        let busFare = 0;
+        // 입력값이 있어야한다.
+        // 0, "", null, undefined, false, NaN -> 나머지는 다 true
+        if (age) { //age : 
+            if (age <= 6 || age >= 70) {
+                busFare = 0;
+            } else if (age < 12) {
+                busFare = 450;
+            } else if (age < 18) {
+                busFare = 700;
+            } else {
+                busFare = 1000;
+            }
+            console.log("버스 요금은 " + busFare + "원입니다.");
+        }
+
+        let x;
+        if (x) {
+            console.log("if 실행");
+        } else {
+            console.log("else 실행");
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

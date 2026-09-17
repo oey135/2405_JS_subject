@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>미림 카페 주문 관리</title>
+        <style>
+            table,
+            th,
+            td {
+                padding: 1vw;
+                align-items: center;
+                text-align: center;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            thead {
+                color: aliceblue;
+                background-color: cornflowerblue;
+            }
+            #quantityInput {
+                width: 4vw;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>미림 카페 주문 관리</h1>
+        <section>
+            <h2>메뉴 선택</h2>
+            <label for="menuSelect">메뉴</label>
+            <select id="menuSelect"></select>
+            <label for="quantityInput">수량</label>
+            <input type="number" id="quantityInput" value="1" min="1" />
+            <button onclick="addOrder()">주문 추가</button>
+        </section>
+        <section>
+            <h2>메뉴 검색</h2>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="메뉴명을 입력하세요"
+            />
+
+            <button onclick="searchMenu()">검색</button>
+            <div id="searchResult">검색 결과가 여기에 표시됩니다.</div>
+        </section>
+        <section>
+            <h2>주문 내역</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>주문번호</th>
+                        <th>메뉴명</th>
+                        <th>단가</th>
+                        <th>수량</th>
+                        <th>금액</th>
+                    </tr>
+                </thead>
+                <tbody id="orderTableBody">
+                    <tr>
+                        <td colspan="5">주문 내역이 없습니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>결제 정보</h2>
+            <div id="totalQuantity">총 주문 수량: 0개</div>
+            <div id="totalPrice">총 결제 금액: 0원</div>
+        </section>
+        <script>
+            /*
+                카페 주문관리 프로그램 만들기
+                => 카페에서 사용하는 간단한 주문 관리 화면을 만들어라.
+                사용자는 메뉴 목록을 확인하고, 원하는 메뉴의 수량을 입력한 뒤 주문 버튼을 누를 수 있다.
+                주문이 완료되면 주문 내역이 테이블에 추가되고, 전체 주문 금액과 총 주문 수량이 화면에
+                표시되어야 한다.
+            */
+            const menuList = [
+                { name: "아메리카노", price: 3000, category: "coffee" },
+                { name: "카페라떼", price: 4000, category: "coffee" },
+                { name: "바닐라라떼", price: 4500, category: "coffee" },
+                { name: "초코라떼", price: 4200, category: "nonCoffee" },
+                { name: "레몬에이드", price: 5000, category: "ade" },
+                { name: "자몽에이드", price: 5200, category: "ade" },
+            ];
+
+            const loadMenu = () => {
+                // 1. menuList 배열을 이용해서 select 태그 안에 option 태그 출력하기
+                // 2. push()와 join()을 사용해서 문자열을 만든 뒤 innerHTML에 넣기
+                let menuOptions = [];
+                for (let menu of menuList) {
+                    menuOptions.push(
+                        `<option value="${menu.name}">${menu.name} : ${menu.price}원</option>`,
+                    );
+                }
+                let menuOptionTags = menuOptions.join("");
+                console.log("메뉴 옵션 : ", menuOptionTags);
+                document.getElementById("menuSelect").innerHTML =
+                    menuOptionTags;
+            };
+
+            const orderList = [];
+            const addOrder = () => {
+                // 1. 선택된 메뉴 인덱스 가져오기
+                let index = orderList.length + 1;
+                let selected = document.getElementById("menuSelect").value;
+                let menu = menuList.find((item) => item.name === selected);
+                console.log(menu);
+
+                // 2. 입력된 수량 가져오기
+                let quantity = document.getElementById("quantityInput").value;
+                console.log("입력 수량 : ", quantity);
+
+                // 3. 수량이 없거나 1보다 작으면 경고 메시지 출력하기
+                if (quantity < 1) {
+                    alert("잘못된 수량 입력입니다. 다시 입력해주세요");
+                    console.log("잘못된 수량 입력 발생");
+                }
+
+                // 4. 주문번호 만들기
+                let orderNo = "ORDER-".concat(String(index).padStart(3, "0"));
+                console.log(orderNo);
+
+                // 5. 주문 객체 만들기
+                let order = {
+                    orderNo: orderNo,
+                    name: menu.name,
+                    price: menu.price,
+                    quantity: +quantity,
+                    total: menu.price * quantity,
+                };
+
+                console.log(order);
+
+                // 6. orderList 배열에 추가하기
+                orderList.push(order);
+
+                // 7. 주문 내역 다시 출력하기 : renderOrderTable() 함수 호출
+                renderOrderTable();
+
+                // 8. 결제 정보 다시 계산하기 : updateTotalInfo()함수 호출
+                updateTotalInfo();
+            };
+
+            const renderOrderTable = () => {
+                // 1. orderList 배열을 map()으로 tr 태그 배열로 변환하기
+                const orderTable = orderList.map((item) => {
+                    return `<tr>
+                            <td>${item.orderNo}</td>
+                            <td>${item.name}</td>
+                            <td>${item.price}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.price * item.quantity}</td>
+                        </tr>`;
+                });
+
+                // 2. join("")으로 문자열로 합치기
+                const orderTags = orderTable.join("");
+
+                // 3. tbody에 innerHTML로 출력하기
+                document.getElementById("orderTableBody").innerHTML = orderTags;
+            };
+
+            const updateTotalInfo = () => {
+                // 1. reduce()를 사용해서 총 주문 수량 계산하기
+                const totalQuantity = orderList.reduce((acc, curr) => {
+                    return acc + curr.quantity;
+                }, 0);
+
+                //2. reduce()를 사용해서 총 결제 금액 계산하기
+                const totalPrice = orderList.reduce((acc, curr) => {
+                    return acc + curr.total;
+                }, 0);
+                console.log(totalPrice, ",", totalQuantity);
+
+                // 3. div 태그에 결과 출력하기
+                document.getElementById("totalQuantity").innerHTML =
+                    "총 주문 수량: " + totalQuantity + "개";
+                document.getElementById("totalPrice").innerHTML =
+                    "총 결제 금액: " + totalPrice + "원";
+            };
+            const searchMenu = () => {
+                // 1. 검색어 가져오기
+                let find = document.getElementById("searchInput").value;
+
+                // 2. 검색어가 비어 있으면 안내 메시지 출력
+                if (!find) {
+                    console.log("검색어 공란 알림");
+                    alert("검색어를 입력해주세요!");
+                } else {
+                    // 3. filter()를 사용해 검색어가 포함된 메뉴만 찾기
+                    let result = menuList
+                        .filter((item) => {
+                            return item.name.includes(find);
+                        })
+                        .map((item) => item.name);
+                    console.log(result);
+
+                    let resultTags = "검색 결과가 표시됩니다.";
+                    if (result.length) {
+                        resultTags = result.join("<br>");
+                    } else {
+                        resultTags = "검색 결과가 없습니다.";
+                    }
+
+                    // 4. 검색 결과를 div에 출력하기
+                    document.getElementById("searchResult").innerHTML =
+                        resultTags;
+                }
+            };
+
+            loadMenu();
+        </script>
+    </body>
+</html>

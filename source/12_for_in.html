@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. 반복문 - for in</title>
+</head>
+
+<body>
+    <script>
+
+        let brands = ["애플", "구글", "아마존", "마이크로소프트", "메타"];
+        //for - in : (배열)이나 객체에서 많이 사용
+        const size = brands.length;
+        for (const i in brands) {
+            //console.log(i);
+            console.log(brands[i]);
+        }
+
+        let person = {
+            name: "홍길동",
+            age: 22,
+            tel: "010-0000-1111",
+            city: "Daegu",
+        };
+
+        //키와 값을 출력해보자
+        for (const key in person) { //for문 안에서 k는 바뀌지 않음
+            //console.log(key + " : " + person[key]);
+        }
+
+        //사용자로부터 키를 입력 받아, 해당 값을 출력
+        //조건) 빈칸, 없는 키 입력(ex) address -> 에러 메시지)
+
+
+        /* 
+        //서연 코드
+        let input = prompt("출력할 키를 입력하세요");
+        if (input && person[input]) { //유효성 검사
+            for (const key in person) {
+                if (input === key) {
+                    console.log(key + " : " + person[key]);
+                    break;
+                }
+            }
+        } else {
+            console.log("유효한 키가 아닙니다.");
+        } */
+
+        //티쳐 코드
+        let userInput = prompt("알고 싶은 데이터는?");
+        if (!userInput) {
+            console.log("키를 입력해야 합니다.");
+        } else {
+            for (const key in person) {
+                if (userInput === key) {
+                    console.log(userInput, ":", person[userInput]);
+                    break;
+                } else {
+                    console.log("없는 키야. 맞는 키를 입력하세요.");
+                }
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

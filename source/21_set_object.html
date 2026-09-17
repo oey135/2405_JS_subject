@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21. set 객체 내장 함수</title>
+</head>
+
+<body>
+    <script>
+        /*
+            - ECMA 6버전에서 추가된 객체
+            - 배열과 매우 유사하나, **유일한 요소**만 갖는다.
+            - 따라서 기존의 긴 소스들을 간단하게 줄일 수 있다.
+            - 필요한 데이터의 특성(고유한 데이터)에 따라 Set 을 사용하면 많은 수고를 줄일 수 있다.
+            - 파이썬처럼 add, has, delete, clear 등의 함수를 내장하고 있다.
+
+            장바구니 중복 상품 체크를 set으로!
+        
+        */
+
+        // 좋아하는 음식을 조사해서 결과를 배열로 받는다고 가정
+        let foods = ["햄버거", "고기", "피자", "라면", "파스타", "고기"];
+
+        // 1. 중복된 값을 제거(객체, for, filter)
+        let favoritefoods = foods.filter((food, index) => {
+            return foods.indexOf(food) === index;
+        });
+
+        // 객체로 만들어서 제거
+        // let oFood = {};
+        // for (const food of foods) {
+        //     oFood[food] = '';
+        // }
+        // favoritefoods = [];
+        // for (const key of foods) {
+        //     favoritefoods.push(key);
+        // }
+        console.log(favoritefoods);
+
+        //set을 사용해서 설문조사 결과를 나타내기
+        let foodSet = new Set(); //파이썬 {}
+        //1. add() : 요소 추가
+        foodSet.add("햄버거");
+        foodSet.add("고기");
+        foodSet.add("피자");
+        foodSet.add("라면");
+        foodSet.add("파스타");
+        foodSet.add("고기"); //중복, 안들어감!
+
+        console.log(foodSet);
+
+        // foods배열에서 "피자"가 있는 지 체크
+        foods = ["햄버거", "고기", "피자", "라면", "파스타", "고기"];
+        console.log(foods.includes("피자"));
+
+        // 2. has() : 요소를 갖고 있는 지 여부를 체크 // foodSet에서 "피자"가 있는 지 체크
+        console.log(foodSet.has("피자"));
+
+        // 3. delete() : foodSet()에서 라면 제거
+        foodSet.delete("라면");
+        console.log(foodSet);
+
+        // 4. clear() : foodSet 리셋
+        foodSet.clear();
+        console.log(foodSet);
+
+
+    </script>
+</body>
+
+</html>

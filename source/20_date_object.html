@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>20. Date 객체 내장 함수</title>
+</head>
+
+<body>
+    <input type="date" name="" id="startDate" /> -
+    <input type="date" name="" id="endDate" />
+    <script src="./js/common.js"></script>
+
+    <script>
+        // 1. 현재 날짜 정보 얻어오기
+
+        let now = new Date();
+        console.log(now); //Wed Jun 17 2026 09:05:37 GMT+0900 (한국 표준시)
+
+        // 2. 년, 월, 일, 시, 분, 초, 밀리초로 날짜 정보 만들기
+
+        let d = new Date(2026, 4, 1, 12, 10, 15, 0);
+        console.log(d);
+
+        // 3. get() 함수의 활용
+
+        let year = now.getFullYear();
+        let month = now.getMonth() + 1; //0~
+        let date = now.getDate(); // 날짜
+        let dayName = now.getDay(); // 요일(숫자)
+        let hour = now.getHours(); // s붙음
+        let minute = now.getMinutes();
+        let second = now.getSeconds();
+        let milliSec = now.getMilliseconds(); // 1초 = 1000밀리초
+        let dayNameArr = [
+            "일요일",
+            "월요일",
+            "화요일",
+            "수요일",
+            "목요일",
+            "금요일",
+            "토요일",
+        ];
+
+        console.log(
+            year,
+            month + 1,
+            date,
+            dayNameArr[dayName],
+            hour,
+            minute,
+            second,
+            milliSec,
+        );
+
+        // 4. set() 함수의 활용 - 거의 사용하지 않는다.
+
+        // 5. 오늘 날짜 포맷 만들기 (2026/06/25)
+
+        let form = `${year}/${month.toString().padStart(2, "0")}/${date.toString().padStart(2, "0")}`;
+        console.log(form);
+
+        // 6. 오늘 날짜 포맷을 id="endDate"에 출력하기
+
+        document.getElementById("endDate").value = form.replaceAll(
+            "/",
+            "-",
+        );
+
+        // 7. 오늘보다 7일전을 id="endStart"에 출력하기
+        // 주의 : 만약 오늘이 6월 1일이라면 5월 25일이라고 출력되어야 한다.
+
+        //기준시 : 1970.01.01.00.00.00
+        let thatDay = new Date(0); //파라미터 한개면 밀리초
+        console.log(thatDay); // Thu Jan 01 1970 09:00:00 GMT+0900 (한국 표준시)
+
+        //하루에 해당하는 밀리초
+        let dayMilliSec = 24 * 60 * 60 * 1000;
+        thatDay = new Date(dayMilliSec);
+        console.log();
+
+        /*
+
+            let ago7days = 7 * 24 * 60 * 60 * 1000; // n * 일 분 초 밀리
+            let agoDate = new Date(year, month, date, hour, minute, second, now.getMilliseconds() - ago7days);
+            console.log(agoDate);
+
+            let agoForm = `${agoDate.getFullYear()}/${agoDate.getMonth().toString().padStart(2, '0')}/${agoDate.getDate().toString().padStart(2, '0')}`;
+            console.log(agoForm);
+
+            document.getElementById("startDate").value = agoForm.replaceAll('/', '-');
+        */
+
+        // 8. 오늘을 밀리초로 구하기 : getTime() 내장함수
+        let nowMilliSec = now.getTime();
+        console.log(new Date(nowMilliSec)); // Wed Jul 01 2026 08:52:09 GMT+0900 (한국 표준시)
+
+        // 9. 오늘을 기준으로 며칠 전, 후를 구하는 함수를 작성하라.
+        console.log(intervalDate(-2)); //2026-06-29
+        console.log(intervalDate(5)); //2026-07-06
+
+        let sevenDaysMilliSec = 7 * 24 * 60 * 60 * 1000; //일 시 분 초 밀리
+        sevenDaysAgo = new Date(now.getTime() - sevenDaysMilliSec);
+        console.log(sevenDaysAgo);
+
+        let agoForm = `${sevenDaysAgo.getFullYear()}-${(sevenDaysAgo.getMonth() + 1).toString().padStart(2, "0")}-${sevenDaysAgo.getDate().toString().padStart(2, "0")}`;
+        console.log(sevenDaysAgo);
+
+        document.getElementById("startDate").value = agoForm;
+
+        // 10. 과제 : 오늘을 기준으로 며칠 전, 후를 구하는 함수를 작성하라
+        const intervalDateFormat = (day, format) => {
+            let intervalDate = new Date(new Date().getTime() + (day * 24 * 60 * 60 * 1000));
+
+            let year = intervalDate.getFullYear().toString();
+            let month = intervalDate.getMonth().toString().padStart(2, 0);
+            let date = intervalDate.getDate().toString().padStart(2, 0);
+
+            return format //연속적인 메소드 사용 : chaining
+                .replace(/YYYY/g, year)
+                .replace(/YY/g, year.slice(2))
+                .replace(/MM/g, month)
+                .replace(/DD/g, date);
+        };
+
+        console.log(intervalDateFormat(-7, "YYYY-MM-DD")); // 2026-06-24;
+        console.log(intervalDateFormat(-7, "YY-MM-DD")); // 26-06-24;
+        console.log(intervalDateFormat(-7, "YYYY/MM/DD")); // 2026/06/24;
+        console.log(intervalDateFormat(-7, "YY.MM.DD")); // 26.06.24;
+
+        // 11. 오늘을 기준으로 며칠 전, 후를 정해진 포맷으로 구하느 함수
+        // common.js에 넣어두세요. 실무에 바로 사용가능합니다.
+
+    </script>
+</body>
+
+</html>

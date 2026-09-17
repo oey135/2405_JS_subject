@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>24. 가위바위보</title>
+</head>
+
+<body>
+    <button onclick="playGame(0)">가위</button>
+    <button onclick="playGame(1)">바위</button>
+    <button onclick="playGame(2)">보</button>
+
+    <script src="./js/common.js"></script>
+    <script>
+        /*
+            가위 바위 보 게임
+            버튼 클릭 이벤트 감지,
+            어떤 버튼을 클릭했는 지 받아옴,
+            랜덤으로 가위 바위 보 중 하나 선택,
+            사용자가 랜덤값 비교,
+            승 패 확인
+        */
+        const playGame = (choice) => {
+            const computerChoice = Math.trunc(Math.random() * 3);
+            const signlist = [
+                {
+                    sign: "가위",
+                    toWin: 2,
+                    toLose: 1,
+                },
+                {
+                    sign: "바위",
+                    toWin: 0,
+                    toLose: 2,
+                },
+                {
+                    sign: "보",
+                    toWin: 1,
+                    toLose: 0,
+                },
+            ];
+            let userSign = signlist[choice].sign;
+            let computerSign = signlist[computerChoice].sign;
+
+            if (signlist[choice].toWin === computerChoice) {
+                console.log(`사용자 : ${userSign}\n컴퓨터 : ${computerSign}\n> 사용자 승리`);
+            } else if (signlist[choice].toLose === computerChoice) {
+                console.log(`사용자 : ${userSign}\n컴퓨터 : ${computerSign}\n> 컴퓨터 승리`);
+            } else {
+                console.log(`사용자 : ${userSign}\n컴퓨터 : ${computerSign}\n> 무승부`);
+            }
+        };
+    </script>
+</body>
+
+</html>

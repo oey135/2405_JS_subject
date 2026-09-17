@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>미림카페 주문 관리 프로그램</title>
+        <link rel="stylesheet" href="./mirim_cafe.css" />
+        <script src="./mirim_cafe.js" defer></script>
+    </head>
+
+    <body onload="loadMenu()">
+        <h1>미림 카페 주문 관리</h1>
+        <div id="contents">
+            <div class="sectionBox" id="menuChoiceSection">
+                <section class="menuSearchContainer">
+                    <h2>메뉴 검색</h2>
+                    <div class="searchDiv">
+                        <input
+                            type="text"
+                            id="menuToFind"
+                            placeholder="메뉴명을 입력하세요"
+                        />
+                        <button
+                            type="button"
+                            id="searchMenu"
+                            onclick="doSearch()"
+                        >
+                            검색
+                        </button>
+                    </div>
+
+                    <div id="searchResult">
+                        <p>검색 결과가 여기에 표시됩니다.</p>
+                    </div>
+                </section>
+                <section class="menuChoice">
+                    <h2>메뉴 선택</h2>
+                    <!--메뉴 목록-->
+                    <div class="menuChoiceContents">
+                        <div id="menuContainer">
+                            <label for="menuList">메뉴</label>
+                            <select name="menuList" id="menuList"></select>
+                        </div>
+                        <div id="amountContainer">
+                            <label for="amountInput">수량</label>
+                            <div class="amountInputDiv">
+                                <input type="number" id="amountInput" />
+                                <!--주문 추가-->
+                                <button
+                                    type="button"
+                                    id="addOrder"
+                                    onclick="addOrder()"
+                                >
+                                    주문 추가
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="sectionBox">
+                <section>
+                    <h2>주문 내역</h2>
+                    <div class="tableDiv">
+                        <table class="orderTable">
+                            <thead>
+                                <th>주문번호</th>
+                                <th>메뉴명</th>
+                                <th>단가</th>
+                                <th>수량</th>
+                                <th>금액</th>
+                            </thead>
+                            <tbody id="orderList">
+                                <tr>
+                                    <td colspan="5">주문 내역이 없습니다.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="paymentInfo">
+                    <h2>결제 정보</h2>
+                    <div class="total">
+                        <p>총 주문 수량: <span id="totalAmount">0개</span></p>
+                        <p>총 결제 금액: <span id="totalPrice">0원</span></p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>

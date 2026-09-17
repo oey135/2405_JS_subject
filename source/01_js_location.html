@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 자바스크립트 작성 위치</title>
+  <script src="./js/01_js_location.js"></script>
+  <script>document.write("Hello World 4!");</script>
+</head>
+
+<body>
+  <!--
+    html은 태그/요소(element)로 이루어짐
+    <img(요소) src="파일위치"(속성, 전역 속성)>
+    절대 경로 : Root부터 나타냄 (ex. C:\Mirim\2-4\js\01_location.js)
+    상대 경로 : 현재 파일(ex. 01_js_location.html) 위치 기준
+    - '.' : 현재 폴더
+    - '..' : 의 부모 폴더
+    - '\' : 의 자식 폴더
+
+    자바스크립트의 작성위치
+    1. <head> - 세번째로 많이 사용 됨
+    2. <body> - 두번째로 많이 사용 됨
+      - 웬만하면 최하단에 작성(html)
+        - js의 길이가 길 때 html을 먼저 로딩해 사용자가 로딩 시간이 짧게 느껴질 수 있도록 한다.
+    3. 외부 파일 삽입 - 가장 많이 사용 됨(협업) 
+      - 위치 무관, 그러나 head에 두는 것이 좋다.(정보는 head에 모으는 것이 나아서)
+    4. 요소에 인라인(inline) - 가장 적게 사용 됨
+  -->
+
+  Hello World 2!!<br />
+  2학년 4반
+
+  <script>
+    document.write("Hello World 3!");
+  </script>
+  <br>
+
+  <button onclick="functionMy();">전송</button> <!--전송 파일 클릭 시 함수 실행-->
+</body>
+
+</html>

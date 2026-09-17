@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23. math 객체 내장 함수</title>
+</head>
+
+<body>
+    <script>
+
+        // new Set(), new Map() 
+        // Math.ceil() <= new로 만들지 않음!
+
+        // 1. round()
+        console.log(Math.round(2.4)); // 2
+        console.log(Math.round(2.9)); // 3
+
+        // 2. ceil()
+        console.log(Math.ceil(2.4)); // 3
+        console.log(Math.ceil(2.9)); // 3
+
+        // 페이징 처리 ex) 게시판 글 10개씩.. total 53개 가정. 페이지는 6페이지 필요
+        let total = 53;
+        let countPage = 10;
+        let totalPage = Math.ceil(total / countPage); // 6
+        console.log("필요한 페이지 수 : " + totalPage);
+
+        // 3. floor()
+        console.log(Math.floor(2.4)); // 2
+        console.log(Math.floor(2.9)); // 2
+        console.log(Math.floor(-2.4)); // -3
+        console.log(Math.floor(-2.9)); // -3
+
+        // 4. trunc()
+        console.log(Math.trunc(2.4)); // 2
+        console.log(Math.trunc(2.9)); // 2
+        console.log(Math.trunc(-2.4)); // -2
+        console.log(Math.trunc(-2.9)); // -2
+
+        // 5. sign()
+        console.log(Math.sign(2.4)); // 1
+        console.log(Math.sign(0)); // 0
+        console.log(Math.sign(-2.4)); // -1
+
+        // 6. pow()
+        console.log(Math.pow(2, 4)); // 16
+        console.log(Math.pow(-2, 3)); // 27
+
+        // 7. sqrt()
+        console.log(Math.sqrt(64)); // 8
+        console.log(Math.sqrt(-1)); // NaN
+
+        // 8. abs()
+        console.log(Math.abs(64)); // 64
+        console.log(Math.abs(-1)); // 1
+
+        // 9. min() - 파라미터 개수제한 X
+        console.log(Math.min(6, 3, 4, -9, 5.6, 12)); // -9
+        console.log(Math.min(-9, 5.6, 12)); // -9
+
+        // 10. max()
+        console.log(Math.max(6, 3, 4, -9, 5.6, 12)); // 12
+        console.log(Math.max(-9, 5.6, 12)); // 12
+
+        // 11. random() - 0~0.999.. 난수 발생
+        console.log(Math.random());
+
+        //활용1. 0~9
+
+        console.log(Math.trunc(Math.random() * 10));
+
+
+        //활용2. 1~10
+        console.log(Math.trunc(Math.random() * 10) + 1);
+
+        //활용3. 1~100
+        console.log(Math.trunc(Math.random() * 100) + 1);
+
+        //활용4. 시작값과 종료값을 주면 사이값을 random하게 나오게 하는 함수를 작성하여 활용해보자
+
+        const getRandomInt = (min, max) => { //3, 76
+            let size = max + "".length;
+            return Math.trunc(Math.random() * (max - min + 1) + min);
+        }
+        console.log(getRandomInt(3, 76));
+
+
+
+
+    </script>
+</body>
+
+</html>

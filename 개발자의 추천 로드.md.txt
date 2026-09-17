@@ -1,0 +1,12 @@
+# 프론트엔드 권장 로드 -
+> html -> css -> 반응형웹(Bootstrap) -> js -> React
+
+정적 ->
+동적(js) ->
+js : if(window.width >= 700) {풀다운 메뉴}
+else if(window.width >= 500) {햄버거}
+->
+반응형 ->
+bootstrap :
+layout과 component 자주 사용
+expample에서 템플릿을 받아와 수정해 만들 수 있음

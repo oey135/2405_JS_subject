@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27. this 키워드</title>
+</head>
+
+<body>
+    <button onclick="myFunction(this)">클릭</button>
+    <input type="button" value="클릭2" onclick="myFunction(this)">
+    <select name="" id="" onchange="myFunction(this)">
+        <option value="">a</option>
+        <option value="">b</option>
+        <option value="">c</option>
+    </select>
+
+    <script>
+        // 1. 객체가 window를 지칭하는 경우
+        console.log(this);
+
+        const myFunction = (param) => {
+            // console.log(this);
+            console.log(param);
+        }
+        // myFunction();
+
+        // 2. DOM 객체를 의미하는 경우
+
+        // 버튼 클릭 시 - <button onclick="myFunction(this)">클릭</button>
+        // 버튼 2 클릭 시 - <input type="button" value="클릭2" onclick="myFunction(this)">
+        // select 변경 시 - <select name="" id="" onchange="myFunction(this)">
+        //  <option value="">a</option>
+        //  <option value="">b</option>
+        //  <option value="">c</option>
+        //</select>
+
+        // 3. 객체 자신을 의미
+
+        let shcool = "Mirim";
+        let type = "Meister";
+
+        let student = {
+            school_name: "Seoul",
+            type: "middle shcool",
+            //함수 => 학교 이름과 계열을 리턴하는 함수
+            school: function () {
+                return this.school_name + " " + this.type; // Seoul middle shcool
+                // return school_name + " " + type; // Mirim Meister
+            }
+        }
+        console.log(student.school());
+
+
+
+
+
+    </script>
+</body>
+
+</html>

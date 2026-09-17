@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. 반복문 - for~each</title>
+</head>
+
+<body>
+    <script>
+        //
+        let brands = ["애플", "구글", "아마존", "마이크로소프트", "메타"];
+        //brands.forEach(function(){});
+        brands.forEach(function (index, brand) { //값이 첫번째 인자, index가 두번째 인자.
+            console.log(index, ":", brand);
+        });
+
+        const myScore = [100, 100, 100, 96, 98, 94, 89];
+        let total = 0;
+        myScore.forEach((score) => { // 화살표 함수
+            total += score;
+        });
+        console.log(total);
+
+        total = 0;
+        myScore.forEach(function (score) { // 선언 함수
+            total += score;
+        });
+        console.log(total);
+
+        // 개인 실습
+        /*
+        다음 객체가 존재한다. 사용자가 키를 입력하면
+        let person = {
+            name : "홍길동",
+            number : 2701,
+            phone: "010-1111-2222",
+            address: "서울시 관악구",
+        };
+
+        1. 입력값이 없는 경우 : "키를 입력해야 동작합니다." 출력
+        2. 존재하지 않는 키를 입력하는 경우 : "존재하지 않는 키입니다." 출력
+        3. 마지막에 홍길동의 점수의 평균을 구해서 출력(foreach)
+        조건 : 함수(선언)를 이용하면 작업이 좀 더 편안할 수 있습니다.
+        */
+
+        let person = {
+            name: "홍길동",
+            number: 2701,
+            phone: "010-1111-2222",
+            address: "서울시 관악구",
+            scores: [10, 20, 30, 40, 50],
+        };
+
+        function inputValueCheck(input, arr) {
+            if (!input) {
+                console.log("키를 입력해야 동작합니다.");
+            } else if (input in person) {
+                console.log("존재하지 않는 키입니다.");
+            } else {
+                console.log(input + " : " + arr[input]);
+            }
+        }
+        let input = prompt("키를 입력하세요.");
+        inputValueCheck(input, person);
+        total = 0;
+        person.scores.forEach(function (score) {
+            total += score;
+        });
+        let avg = total / person.scores.length;
+        console.log(person.name + "의 평균 점수 : " + avg);
+
+
+
+
+
+    </script>
+</body>
+
+</html>

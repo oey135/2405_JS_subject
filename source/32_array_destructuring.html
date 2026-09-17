@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>32. 배열 구조 분해 할당</title>
+</head>
+
+<body>
+    <script>
+        // 배열 구조 분해 할당
+        function getGeolocation() {
+            return [1123.89, 567.97];
+        }
+        let [letitude, longitude] = getGeolocation();
+        console.log(letitude);
+        console.log(longitude);
+
+        function getPerson() {
+            return {
+                name: "권초현",
+                address: "신림동",
+                phone: "010-0000-0000",
+                age: 17,
+            };
+        }
+
+        // 객체 분해 할당!
+        let { name, address } = getPerson();
+        console.log(name);
+        console.log(address);
+
+
+
+    </script>
+</body>
+
+</html>

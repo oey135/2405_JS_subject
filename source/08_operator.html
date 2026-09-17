@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        1. 할당 연산자(산술 연잔자 +, -, *, /, %, **) = 
+        배정, 할당(assignment)
+        */
+        let x = 3;
+        let y = 5;
+        x = x + y;
+        console.log(x); //8
+        x = x - y;
+        console.log(x); //5
+        x = x * y;
+        console.log(x); //15
+        x = x / y;
+        console.log(x); //3
+        x = x % y;
+        console.log(x); //3
+        x = x ** y;
+        console.log(x); //243
+
+        x = 2;
+        y = 7;
+        x = x ** y;
+        console.log(x); //128
+
+        // 2. 복합 할당 연산자 (+=, -=, *=, /=, %=)
+        x = 2;
+        y = 3;
+        console.log(x += y); //x = x+y 5
+        console.log(x -= y); //x = x-y 2
+        console.log(x *= y); //x = x*y 6
+        console.log(x /= y); //x = x/y 2
+        console.log(x %= y); //x = x%y 2
+
+        // 3. 비교 연산자 (==, ===, !=, !==, >,>=,<,<=)
+        let a = 3;
+        let b = "3";
+        // 데이터 타입이 달라도 값이 같으먄 true -> 언어의 유연성
+        console.log(a == b); //true
+        console.log(a === b); //false
+
+        console.log(a != b); //false
+        console.log(a !== b); //true
+
+        // 4. 산술 연산자 : ++ -- (위치 중요)
+        x = 5;
+        y = x++; // 출력 후 증가 (증가 전 값 반환 후 다음 줄 부터 증가)
+        console.log(y); //5
+        console.log(x); //6
+
+        x = 5;
+        y = ++x; //드물다
+        console.log(y); //6
+
+        x = 5;
+        y = x--;
+        console.log(y); //5
+        console.log(x); //4
+
+        x = 5;
+        y = --x;
+        console.log(y); //4
+
+        // 5. 단항 부정 연산자 : - 부호 바뀜
+        x = -3;
+        console.log(x);
+        console.log(-x);
+
+        // 6. 숫자화 연산자 : + 숫자가 아닌 문자나 boolean값을 숫자화
+        x = "3";
+        console.log(typeof x);
+        y = +x;
+        console.log(typeof y);
+
+        z = true;
+        console.log(typeof z);
+        z = +false; // 0
+        console.log(typeof z);
+        console.log(z);
+
+        // prompt로 두 수 입력 받아 합을 구하는 코드
+        // let n1 = +prompt("첫 번째 수 입력");
+        // let n2 = +prompt("두 번째 수 입력");
+        // console.log("두 수의 합 : ", (n1 + n2));
+
+        // 7. 논리 연산자 : 조건을 여러 가지 만족시키는 지 알아보는 연산자
+        // &&(둘 다 만족해야 ture) ||(둘 중 하나만 만족해도 true)
+
+        let o = true && false; // false 수행 연습!
+
+        o = 3 > 2 && 4 > 7; // false
+        console.log(o);
+        o = 3 > 2 && 8 > 7; // true
+        console.log(o);
+        o = true || false; // true
+        console.log(o);
+        o = 3 > 2 || 4 > 7; // true
+        console.log(o);
+        o = 3 > 4 || 4 < 2 || 2 > 1; // true
+        console.log(o);
+
+        // 8. 문자열 연산자 : +
+        let firstName = "John";
+        let lastName = "Bacon";
+        let fullName = firstName + lastName;
+        console.log(fullName);
+
+        // 9. 조건 삼항 연산자 : 조건 ? 참 : 거짓 ;
+        let age = 16;
+        let isAdult = age >= 20 ? "성인" : "미성년자";
+        console.log(isAdult);
+
+        // 90점 이상이면 A, 80 이상이면 B, 70점 이상이면 C, 나머지는 E
+        let score = prompt("당신의 점수는?"); // +를 안해도 잘 실행 됌!
+        let grade = score >= 90 ? "A" : (score >= 80 ? "B" : (score >= 70 ? "c" : "E"));
+        console.log(grade);
+
+        // 수업 진행 중 과제
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

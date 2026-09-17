@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slice 실무 활용 예제</title>
+</head>
+
+<body>
+    <script>
+        // 1. slice() 실무 활용예제
+
+        // 1-1. 길이가 긴 문자열의 일부분을 보여주고 '...'으로 나머지를 보여주기
+
+        const longString = "보상금 받고도 안 나가더니 포크레인 '우르르'…무등산 계곡 상가들 철거";
+
+        const truncateTitle = (title, maxLength) => {
+            if (title.length > maxLength) {
+                return title.slice(0, maxLength) + "...";
+            } else {
+                return title;
+            }
+        };
+
+        console.log(truncateTitle(longString, 15));
+
+        //1-2. 개인정보 마스킹 처리 (뒤에서 부터 하는 것을 추천)
+
+        let phoneNumber = "010-1234-5678";
+        let hiddenNumber = phoneNumber.slice(0, -4) + "****";
+        console.log(hiddenNumber); //010-1234-****
+
+        phoneNumber = "010-345-6789";
+        hiddenNumber = phoneNumber.slice(0, -4) + "****";
+        console.log(hiddenNumber); // 010-345-****
+
+        // 7. replace() 실무 활용 예제 (with 정규식(regular expression))
+
+        phoneNumber = "010-1234-5678";
+        //db에서 전번을 저장 => 숫자만 저장
+        let clearNumber = phoneNumber;
+        for (let i of clearNumber) {
+            if (i === "-") {
+                clearNumber = clearNumber.replace("-", "");
+            }
+        }
+        console.log(clearNumber);
+
+        /*
+            정규식 (regular expression)
+            - /  /안에 작성
+            - D : 숫자
+            - \ : not
+            - option : /  /옵션 => g : 모두, i : 대소문자 구분X
+
+        */
+        clearNumber = phoneNumber.replace(/\D/g, "");
+        console.log(clearNumber);
+
+        let str = "Welcome JeJu! jeju!";
+        console.log(str.replace(/JeJu/gi, "Seoul"));
+
+        // 13. padStart() 실무 활용 예제
+
+        // 13-1. 보안상의 이유로 db에서 읽어온 카드 번호의 뒷자리만 보여주고자 할 경우
+
+        const cardNumber = "123456";
+        const maskedCardNumber = cardNumber.padStart(12, "*");
+        console.log(maskedCardNumber);
+
+        //13-2. 상품번호를 취급 => 카테고리별로 이름을 붙이고자 할 경우
+        // 587 => 음식 카테고리 food- 를 붙인다. generateCategory 함수
+
+        const generateCategory = (code) => code.toString().padStart(8, "food-");
+
+        console.log(generateCategory(234));
+        console.log(generateCategory(587));
+
+
+        // 14. charAt(index) 실무 활용 예제
+
+        // 주민등록번호 뒷 첫자리를 보고 성별을 판단, 사원번호 첫자리를 보고 직급을 판단 ...
+
+        const checkGender = (number) => {
+            let genderNum = parseInt(number.charAt(7));
+            let answer = "";
+            if (genderNum % 2 === 1) {
+                answer = "남성";
+            } else {
+                answer = "여성";
+            }
+
+            if (genderNum < 5) {
+                answer = answer.padStart(6, "내국인 ");
+            } else {
+                answer = answer.padStart(6, "외국인 ");
+            }
+            return answer;
+        }
+
+        console.log(checkGender("090620-4058276"));
+
+        // 16. split(구분자)
+
+        // 16-1. 카테고리와 제품명 찾기
+
+        const itemUrl = "http://myShop.com/products/eletronics/galaxy-26";
+        // 카테고리 : electronics, 제품명 : galaxy-26
+
+        let urlUnit = itemUrl.split("/");
+
+        //일반화
+        console.log(`카테고리 : ${urlUnit[urlUnit.length - 2]}`);
+        console.log(`제품명 : ${urlUnit[urlUnit.length - 1]}`);
+
+        // 16-2. 로그 파일의 데이터 처리
+        // 비허가 회원이 접근한 경우를 찾아보자.
+
+        const csvData = "2026-04-29, Login_Success,user_01\n2024-04-29,Login_Fail,user_02";
+
+        const logData = csvData.split("\n");
+        // console.log(logData);
+        for (let line of logData) {
+            [date, status, user] = line.split(","); //배열 구조 분할 할당********************
+            // 각 자리의 변수 명을 줌..! 선언자 작성X
+            if (status === 'Login_Fail') {
+                console.log(`비허가 회원 ${user}이 ${date}날 접근하였습니다.`);
+
+            }
+        }
+
+        // 18. ***endsWith() :
+
+        // 18-1. 파일 업로드 시 확장자 제한할 때 사용
+        // jpg, png 업로드 가능
+
+        const fileNameCheck = (fileName) => {
+            fileName = fileName.toLowerCase();
+            if (fileName.endsWith(".jpg" || ".png")) {
+                return "업로드 가능";
+            } else {
+                return "업로드 불가";
+            }
+        };
+        console.log(fileNameCheck("aaa.JPG")); // 가능
+        console.log(fileNameCheck("bbb.gif")); // 불가능
+
+
+
+
+    </script>
+</body>
+
+</html>

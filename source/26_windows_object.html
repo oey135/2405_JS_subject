@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26. windows 객체 내장 함수</title>
+</head>
+
+<body>
+    <script>
+        // windows라고 명시하는 것은 선택
+        const doDelete = () => {
+            const pwd = prompt("비밀번호 입력 : ");
+            if (pwd === "1234") {
+                if (confirm("정말 삭제하시겠습니까?")) {
+                    console.log("삭제 완료");
+                } else {
+                    console.log("삭제 취소");
+                }
+            } else {
+                alert("부적절한 접근입니다.");
+            }
+        };
+        // doDelete();
+
+        const openNaver = () => {
+            open("https://naver.com");
+        }
+        // openNaver();
+
+        setTimeout(function () {
+            console.log("3초 후");
+            // openNaver();
+        }, 2000); // 밀리초 단위
+
+        const myInterval =
+            setInterval(function () {
+                console.log("4초마다");
+            }, 4000);
+
+        clearInterval(myInterval);
+    </script>
+</body>
+
+</html>

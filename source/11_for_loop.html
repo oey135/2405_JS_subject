@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. for문</title>
+</head>
+
+<body>
+    <script>
+        /*
+
+        기본 for
+        for(st1; st2; st3) {
+            반복할 구문 (조건이 참인 동안 반복)
+        }
+        
+        - st1 : 조건 초기화
+        - st2 : 조건 참, 거짓 판별
+        - st3 : 증감
+        - 실행순서 : st1 -> st2? 참 -> 구문 -> st3 -> st2 ? 참 -> 구문 -> st3...
+        - 반복 횟수를 정확히 알고 있을 경우 좋다
+
+        */
+
+        let brands = ["애플", "구글", "아마존", "마이크로소프트", "메타"];
+        const size = brands.length;
+        for (let i = 0; i < size; i++) {
+            //console.log(brands[i]);
+        }
+        
+
+        //실습 : 자판기에서 음료를 구입하는 프로그램 작성
+        let inputCoin = 1000;
+        const drinklist = [
+            { name: "오렌지", price: 1000 },
+            { name: "파워에이드", price: 1200 },
+            { name: "커피", price: 700 },
+            { name: "보리음료", price: 1200 },
+            { name: "코카콜라", price: 1800 },
+        ];
+
+        let buyable = [];
+        for (let i = 0; i < drinklist.length; i++) {
+            if (inputCoin >= drinklist[i].price) {
+                buyable.push(drinklist[i].name);
+            }
+        }
+        console.log("구매 가능한 음료 목록 : " + buyable);
+
+        let availableDrink = []; //현정T 코드
+        for (let i = 0; i < drinklist.length; i++) {
+            let drink = drinklist[i];
+            if (inputCoin >= drink.price) {
+                availableDrink.push(drink.name);
+            }
+        }
+        console.log("구매 가능한 음료 목록 : " + availableDrink);
+
+        //break : 조건 구문이나 반복문에서 빠져나오게 하는 명령
+        for (let i = 0; i < 10; i++) {
+            if (i == 5) {
+                break;
+            }
+            console.log(i);
+        }
+
+        //continue : 그 단계는 넘어가고 다음 step으로
+        for (let i = 0; i < 10; i++) {
+            if (i == 5) {
+                continue;
+            }
+            console.log(i);
+        }
+
+    </script>
+</body>
+
+</html>

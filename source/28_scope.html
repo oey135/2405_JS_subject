@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28. 스코프</title>
+</head>
+
+<body>
+    <script>
+        let myCar = "kia";
+        function myFuntion() {
+            console.log(myCar);
+        }
+        myFuntion();
+        function myFuntion2() {
+            let myCar = "테슬라";
+            let myCar2 = "테슬라";
+            console.log(myCar);
+        }
+        myFuntion2();
+        // console.log(myCar2);
+
+    </script>
+</body>
+
+</html>

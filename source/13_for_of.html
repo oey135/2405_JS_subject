@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. 반복문 - for ~ of</title>
+</head>
+
+<body>
+    <script>
+        //1. 배열
+        let brands = ["애플", "구글", "아마존", "마이크로소프트", "메타"];
+        for (const brand of brands) {
+            console.log(brand);
+        }
+
+        //2. 문자열
+        const lang = "javaScript";
+        for (const char of lang) {
+            console.log(char);
+        }
+
+        //연습 - 숫자 한 자리씩 출력
+        let num = 1234567890;
+        for (const n of num.toString()) {
+            console.log(n);
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29. 기본 함수매개변수</title>
+</head>
+
+<body>
+    <script src="./js/common.js"></script>
+    <script>
+        const sayHello = (name = "아무개") => {
+            if (name) {
+                console.log("Hello " + name);
+            }
+        };
+        sayHello("Brad Pitt");
+        sayHello();
+
+        console.log(intervalDateFormat(-7)); // 2026-06-24;
+    </script>
+</body>
+
+</html>
