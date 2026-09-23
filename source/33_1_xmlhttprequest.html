@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>33. xml http request</title>
+</head>
+
+<body>
+    <script>
+
+        // 1. 조회 : GET, 200
+        const getPosts = () => {
+            const xhr = new XMLHttpRequest(); // 객체 생성
+            xhr.open("GET", "http://localhost:3000/posts"); // 준비
+            xhr.setRequestHeader("content-type", "application/json"); // 컨텐트 타입
+            xhr.send(); // 요청
+            xhr.onload = () => { // 응답 오면 실행할 함수
+                if (xhr.status === 200) {
+                    // 성공시 출력
+                    const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+                    console.log(result);
+
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+
+        const getData = (userInput) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `http://localhost:3000/${userInput}`);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const result = JSON.parse(xhr.response);
+                    console.log(result);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+
+                }
+            }
+        }
+        getPosts();
+        getData("comments");
+        getData("profile");
+    </script>
+</body>
+
+</html>
