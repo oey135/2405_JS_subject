@@ -1,78 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>22. map</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>22. map</title>
-</head>
+    <body>
+        <script>
+            /*
+                Map 객체
 
-<body>
-    <script>
-        console.log("===set으로 해보기===");
+                특징 : 
+                - key 와 value 로 이루어진 객체, 마치 Object 와 유사
+                - key에 문자가 아닌 값이 올 수 있으므로, 키가 문자열이 아닌 object를 만들고자 할 경우 대체제로 활용이 가능
+                - 파이선의 딕셔너리와 유사
+                - Object - Set(중복X) - Map(키, 순서 보장)은 유사!
+                - map은 iterable 객체이므로 forEach()를 사용하면 매우 효과적이다.
+                - map이름.forEach(함수) ex) `personMap.forEach((value, key)) => {}`
+                    **값, 키 순서 헷갈리지 말기**
+                    
+                - Object 와 Map의 차이
+                    - Object
+                        key : 문자만 가능
+                        size property : 속성 제공X
+                        for-in 의 순서 : 보장 X
+                    - Map
+                        key : 모든 가능
+                        size property : size 속성 제공
+                        for-in 의 순서 : 보장 O
+                */
+            console.log("===set으로 해보기===");
 
-        let oPerson = {};
-        oPerson.name = "권초현";
-        oPerson.address = "신림동";
-        oPerson.email = "kwon@gmail.com";
-        oPerson["170"] = 49;
+            let oPerson = {};
+            oPerson.name = "권초현";
+            oPerson.address = "신림동";
+            oPerson.email = "kwon@gmail.com";
+            oPerson["170"] = 49;
 
-        let c = 0;
-        for (const key in oPerson) {
-            c++;
-            console.log(`${key} : ${oPerson[key]}`);
-        }
-        console.log(`총 요소 개수 : ${c}`);
+            let c = 0;
+            for (const key in oPerson) {
+                c++;
+                console.log(`${key} : ${oPerson[key]}`);
+            }
+            console.log(`총 요소 개수 : ${c}`);
 
+            // 1. map생성
+            let personMap = new Map();
 
-        // 1. map생성
-        let personMap = new Map();
+            // 2. set() : 요소 추가
+            personMap.set("name", "권초현");
+            personMap.set("address", "신림동");
+            personMap.set("email", "kwon@gamil.com");
+            personMap.set(170, 49);
 
-        // 2. set() : 요소 추가
-        personMap.set("name", "권초현");
-        personMap.set("address", "신림동");
-        personMap.set("email", "kwon@gamil.com");
-        personMap.set(170, 49);
+            personMap.forEach((v, k) => {
+                console.log(`${k} : ${v}`);
+            });
 
-        personMap.forEach((v, k) => {
-            console.log(`${k} : ${v}`);
-        })
+            // 3. size 속성 : 요소 개수
+            console.log("총 요소 개수 : " + personMap.size);
 
-        // 3. size 속성 : 요소 개수
-        console.log("총 요소 개수 : " + personMap.size);
+            // 4. keys() : 키 값만 골라내기
+            for (let key of personMap.keys()) {
+                console.log(key);
+            }
 
-        // 4. keys() : 키 값만 골라내기
-        for (let key of personMap.keys()) {
-            console.log(key);
-        }
+            // 5. values() : 값만 골라내기
+            for (let value of personMap.values()) {
+                console.log(value);
+            }
 
-        // 5. values() : 값만 골라내기
-        for (let value of personMap.values()) {
-            console.log(value);
-        }
+            // 6. get() : 키를 이용해서 값을 얻어오기
+            console.log(personMap.get(name));
 
-        // 6. get() : 키를 이용해서 값을 얻어오기
-        console.log(personMap.get(name));
+            // 7. has() : 키의 존재여부 => true, false
+            console.log(personMap.has("phone")); //false
+            console.log(personMap.has("adress")); //true
 
-        // 7. has() : 키의 존재여부 => true, false
-        console.log(personMap.has("phone")); //false
-        console.log(personMap.has("adress")); //true
+            // 8. delete() : 해당 요소를 삭제
+            personMap.delete("name");
+            console.log(`총 요소 개수 : ${personMap.size}`);
 
-        // 8. delete() : 해당 요소를 삭제
-        personMap.delete("name");
-        console.log(`총 요소 개수 : ${personMap.size}`);
-
-        // 9. clear() : 모든 요소를 삭제
-        personMap.clear();
-        console.log(personMap.size);
-
-
-
-
-
-
-
-    </script>
-</body>
-
+            // 9. clear() : 모든 요소를 삭제
+            personMap.clear();
+            console.log(personMap.size);
+        </script>
+    </body>
 </html>
