@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>33_3. xml http request ex</title>
+    <style>
+        body {
+            margin: 30px;
+            box-sizing: border-box;
+        }
+
+        .input-group {
+            padding: 10px;
+        }
+
+        input {
+            padding: 5px;
+        }
+
+        .button-group {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+
+        span#bold {
+            font-weight: 700;
+        }
+
+        p {
+            margin: 20px 10px;
+            padding: 10px 15px;
+            border-bottom: solid 1px gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Posts 데이터 관리</h1>
+    <div class="input-group">
+        <input type="text" name="" id="inputId" placeholder="id">
+        <input type="text" name="" id="inputTitle" placeholder="제목(title)">
+        <input type="text" name="" id="inputView" placeholder="뷰(view)">
+    </div>
+    <div class="button-group">
+        <button id="btnRead" onclick="getPost('posts')">조회 (GET)</button>
+        <button id="btnCreate" onclick="createPost('posts')">생성 (POST)</button>
+        <button id="btnUpdate" onclick="updatePost('posts')">수정 (PUT)</button>
+        <button id="btnDelete" onclick="deletePost('posts')">삭제 (DELETE)</button>
+    </div>
+
+    <h2>데이터 목록</h2>
+    <div id="postsList">
+        <p><span id="bold">ID:</span><span id="id"></span><span id="bold">제목:</span><span id="id"></span><span
+                id="bold">VIEW:</span><span id="id"></span></p>
+
+    </div>
+
+    <script>
+        const inputId = document.getElementById("inputId");
+        const inputTitle = document.getElementById("inputTitle");
+        const inputView = document.getElementById("inputView");
+
+        const getBtn = document.getElementById("getBtn");
+        const postBtn = document.getElementById("postBtn");
+        const putBtn = document.getElementById("putBtn");
+        const deleteBtn = document.getElementById("deleteBtn");
+
+        const postList = document.getElementById("postList");
+
+
+
+        const url = " http://localhost:3000/";
+
+        const onload = () => {
+
+            let listTag = [];
+            console.log(posts);
+
+            for (let post of posts) {
+                let id = post[id];
+                let title = post[title];
+                let view = post[view];
+                listTag.push(
+                    `<p><span id="bold">ID:</span>${id}<span id="bold">제목:</span>${title}<span id="bold">VIEW:</span>${view}</p>`
+                );
+            }
+            postList.innerHTML = listTag;
+
+        }
+
+        promise
+        // 1. 조회 : GET, 200
+        const getData = (target) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url + target);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const result = JSON.parse(xhr.response);
+                    console.log(result); // document -> redering()
+
+                    return result;
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        };
+
+        onload();
+
+        const result = getData("posts");
+        console.log(result); // 비동기라서 undefined - promise사용(promise 간단히 -> fetch(또한 비동기) -> async,await)
+
+    </script>
+</body>
+
+</html>

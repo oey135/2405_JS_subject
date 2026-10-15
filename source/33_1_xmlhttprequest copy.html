@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>33. xml http request</title>
+</head>
+
+<body>
+    <script>
+        const url = "http://localhost:3000/";
+
+        // 1. 조회 : GET, 200
+        // const getPosts = () => {
+        //     const xhr = new XMLHttpRequest(); // 객체 생성
+        //     xhr.open("GET", "http://localhost:3000/posts"); // 준비
+        //     xhr.setRequestHeader("content-type", "application/json"); // 컨텐트 타입
+        //     xhr.send(); // 요청
+        //     xhr.onload = () => {
+        //         // 응답 오면 실행할 함수
+        //         if (xhr.status === 200) {
+        //             // 성공시 출력
+        //             const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+        //             console.log(result);
+        //         } else {
+        //             console.log(xhr.status, xhr.statusText);
+        //         }
+        //     };
+        // };
+        const getData = (target) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url + target);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const result = JSON.parse(xhr.response);
+                    console.log(result);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        };
+
+        // 2. 생성  : POST, 201
+        const postData = (target) => {
+            const xhr = new XMLHttpRequest(); // 객체 생성
+            xhr.open("POST", url + target); // 준비
+            // 컨텐트 타입 (:charset=UTF-8)
+            xhr.setRequestHeader("content-type", "application/json:charset=UTF-8"); // 컨텐트 타입
+
+            const newData = { id: 3, title: "Kwonch", views: 300 };
+
+            // 생성할 데이터 -> json으로 변환
+            xhr.send(JSON.stringify(newData)); // 요청
+            xhr.onload = () => {
+                // 응답 오면 실행할 함수
+                if (xhr.status === 201) {
+                    // 성공시 출력
+                    const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+                    console.log(result);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        };
+
+        // 3. 수정  : PUT, 200
+        const putData = (targetId) => {
+            const xhr = new XMLHttpRequest(); // 객체 생성
+            xhr.open("PUT", url + targetId); // 준비
+            // 컨텐트 타입 (:charset=UTF-8)
+            xhr.setRequestHeader("content-type", "application/json:charset=UTF-8"); // 컨텐트 타입
+
+            const newData = { title: "Kwonch", views: 1000 };
+
+            // 수정할 데이터 -> json으로 변환
+            xhr.send(JSON.stringify(newData)); // 요청
+            xhr.onload = () => {
+                // 응답 오면 실행할 함수
+                if (xhr.status === 200) {
+                    // 성공시 출력
+                    const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+                    console.log(result);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        };
+
+        // 4. 삭제  : DELETE, 200
+        const deleteData = (targetId) => {
+            const xhr = new XMLHttpRequest(); // 객체 생성
+            xhr.open("DELETE", url + targetId); // 준비
+            // 컨텐트 타입 (:charset=UTF-8)
+            xhr.setRequestHeader("content-type", "application/json:charset=UTF-8"); // 컨텐트 타입
+
+            // 수정할 데이터 -> json으로 변환
+            xhr.send(JSON.stringify(newData)); // 요청
+            xhr.onload = () => {
+                // 응답 오면 실행할 함수
+                if (xhr.status === 200) {
+                    // 성공시 출력
+                    const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+                    console.log(result);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        };
+
+        getData("posts");
+        getData("comments");
+        getData("profile");
+        postData("posts");
+        putData("posts/-PXVl7u952I");
+        deleteData("comments/2");
+
+        /*
+        단점
+        1. 비동기 통신 : request(send) 발생하면 response가 올 떄까지 기다리지 않는다. -> (순서 보장X)
+        2. 출력 부분 : 재활용 어렵다. -> rendering() 함수 제작
+        */
+    </script>
+</body>
+
+</html>

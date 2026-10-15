@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>33_2. xml http request error</title>
+</head>
+
+<body>
+    <script>
+        const url = "http://localhost:3000/";
+
+        // 1. 조회 : GET, 200
+        const getData = (target) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url + target);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const result = JSON.parse(xhr.response);
+                    console.log(result); // document -> redering()
+
+                    return result;
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        };
+
+        const result = getData("posts");
+        console.log(result); // 비동기라서 undefined - promise사용(promise 간단히 -> fetch(또한 비동기) -> async,await)
+
+
+        /*
+        단점
+        1. 비동기 통신 : request(send) 발생하면 response가 올 떄까지 기다리지 않는다. -> (순서 보장X)
+        2. 출력 부분 : 재활용 어렵다. -> rendering() 함수 제작
+        3. undefined : 응답이 도달하기 전에 호출
+        */
+    </script>
+</body>
+
+</html>
