@@ -47,7 +47,7 @@
 
             console.log(
                 year,
-                month + 1,
+                month,
                 date,
                 dayNameArr[dayName],
                 hour,
@@ -74,7 +74,7 @@
                 "-",
             );
 
-            // 7. 오늘보다 7일전을 id="endStart"에 출력하기
+            // 7. 오늘보다 7일전을 id="startDate"에 출력하기
             // 주의 : 만약 오늘이 6월 1일이라면 5월 25일이라고 출력되어야 한다.
 
             //기준시 : 1970.01.01.00.00.00
@@ -137,7 +137,7 @@
             console.log(intervalDateFormat(-7, "YYYY/MM/DD")); // 2026/06/24;
             console.log(intervalDateFormat(-7, "YY.MM.DD")); // 26.06.24;
 
-            // 11. 오늘을 기준으로 며칠 전, 후를 정해진 포맷으로 구하느 함수
+            // 11. 오늘을 기준으로 며칠 전, 후를 정해진 포맷으로 구하는 함수
             // common.js에 넣어두세요. 실무에 바로 사용가능합니다.
         </script>
     </body>

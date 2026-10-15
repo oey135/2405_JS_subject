@@ -187,7 +187,7 @@
                 document.getElementById("tbody").innerHTML = trTags;
             };
 
-            // 3. pop() : 배열의 마지막 요소를 제거 ()
+            // 3. pop() : 배열의 마지막 요소를 제거
 
             brands = ["하이닉스", "삼성", "구글", "네이버", "애플", "카카오"];
             console.log(brands.pop());
@@ -507,10 +507,10 @@
             userList.map((user) => {
                 userListTag.push(
                     `<tr>
-                    <td>${user.lastName}</td>
-                    <td>${user.firstName}</td>
-                    <td>${user.email}</td>
-                </tr>`,
+                        <td>${user.lastName}</td>
+                        <td>${user.firstName}</td>
+                        <td>${user.email}</td>
+                    </tr>`,
                 );
             });
             document.getElementById("userTbody").innerHTML =
@@ -521,10 +521,10 @@
             products.map((item) => {
                 productsTag.push(
                     `<tr>
-                    <td>${item.name}</td>
-                    <td>${item.category}</td>
-                    <td>${item.price}</td>
-                </tr>`,
+                        <td>${item.name}</td>
+                        <td>${item.category}</td>
+                        <td>${item.price}</td>
+                    </tr>`,
                 );
             });
             // document.getElementById("prodTbody").innerHTML = productsTag.join("");
@@ -543,8 +543,8 @@
             products.map((item) => {
                 newProdTag.push(
                     `<div>
-                    <h2>${item.name} : ${item.price}</h2>
-                </div>`,
+                        <h2>${item.name} : ${item.price}</h2>
+                    </div>`,
                 );
             });
             document.getElementById("prodTbody").innerHTML =
@@ -562,7 +562,7 @@
                 형식 -
                 배열.reduce((누적값, 현재값) => {
                     return 다음 누산기에 넘겨줄 값 (sum += curr)
-                }, 누적값 초기값)
+                }, 초기값)
 
             */
 

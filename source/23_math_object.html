@@ -80,7 +80,6 @@
             //활용4. 시작값과 종료값을 주면 사이값을 random하게 나오게 하는 함수를 작성하여 활용해보자
             const getRandomInt = (min, max) => {
                 //3, 76
-                let size = max + "".length;
                 return Math.trunc(Math.random() * (max - min + 1) + min);
             };
             console.log(getRandomInt(3, 76));
