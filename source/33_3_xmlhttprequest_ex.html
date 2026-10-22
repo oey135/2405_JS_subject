@@ -37,6 +37,22 @@
             padding: 10px 15px;
             border-bottom: solid 1px gray;
         }
+
+        table {
+            border: solid 1px gray;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 10px 15px;
+            background-color: blanchedalmond;
+            border: solid 1px gray;
+        }
+
+        td {
+            padding: 10px 15px;
+            border: solid 1px gray;
+        }
     </style>
 </head>
 
@@ -45,79 +61,191 @@
     <div class="input-group">
         <input type="text" name="" id="inputId" placeholder="id">
         <input type="text" name="" id="inputTitle" placeholder="제목(title)">
-        <input type="text" name="" id="inputView" placeholder="뷰(view)">
+        <input type="number" name="" id="inputView" placeholder="뷰(view)">
     </div>
     <div class="button-group">
-        <button id="btnRead" onclick="getPost('posts')">조회 (GET)</button>
-        <button id="btnCreate" onclick="createPost('posts')">생성 (POST)</button>
-        <button id="btnUpdate" onclick="updatePost('posts')">수정 (PUT)</button>
-        <button id="btnDelete" onclick="deletePost('posts')">삭제 (DELETE)</button>
+        <button id="btnRead" onclick="getPost()">조회 (GET)</button>
+        <button id="btnCreate" onclick="createPost()">생성 (POST)</button>
+        <button id="btnUpdate" onclick="updatePost()">수정 (PUT)</button>
+        <button id="btnDelete" onclick="deletePost()">삭제 (DELETE)</button>
     </div>
 
     <h2>데이터 목록</h2>
     <div id="postsList">
-        <p><span id="bold">ID:</span><span id="id"></span><span id="bold">제목:</span><span id="id"></span><span
-                id="bold">VIEW:</span><span id="id"></span></p>
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>제목</th>
+                <th>조회수</th>
+            </thead>
+            <tbody id="loadBody">
+                <tr>
+                    <td colspan="3">조회 된 결과가 없습니다.</td>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
 
-    <script>
-        const inputId = document.getElementById("inputId");
-        const inputTitle = document.getElementById("inputTitle");
-        const inputView = document.getElementById("inputView");
+    <script defer>
+        // const inputId = document.getElementById("inputId");
+        // const inputTitle = document.getElementById("inputTitle");
+        // const inputView = document.getElementById("inputView");
 
-        const getBtn = document.getElementById("getBtn");
-        const postBtn = document.getElementById("postBtn");
-        const putBtn = document.getElementById("putBtn");
-        const deleteBtn = document.getElementById("deleteBtn");
+        // const getBtn = document.getElementById("getBtn");
+        // const postBtn = document.getElementById("postBtn");
+        // const putBtn = document.getElementById("putBtn");
+        // const deleteBtn = document.getElementById("deleteBtn");
 
-        const postList = document.getElementById("postList");
-
-
+        // const postList = document.getElementById("postList");
 
         const url = " http://localhost:3000/";
 
-        const onload = () => {
-
-            let listTag = [];
-            console.log(posts);
-
-            for (let post of posts) {
-                let id = post[id];
-                let title = post[title];
-                let view = post[view];
-                listTag.push(
-                    `<p><span id="bold">ID:</span>${id}<span id="bold">제목:</span>${title}<span id="bold">VIEW:</span>${view}</p>`
-                );
-            }
-            postList.innerHTML = listTag;
-
-        }
-
-        promise
-        // 1. 조회 : GET, 200
-        const getData = (target) => {
+        // 조회 기능 : 
+        function getPost() {
             const xhr = new XMLHttpRequest();
-            xhr.open("GET", url + target);
+            xhr.open("GET", url + "posts");
             xhr.setRequestHeader("content-type", "application/json");
             xhr.send();
             xhr.onload = () => {
                 if (xhr.status === 200) {
                     const result = JSON.parse(xhr.response);
-                    console.log(result); // document -> redering()
 
-                    return result;
+                    // document -> redering()
+                    rendering(result);
                 } else {
                     console.log(xhr.status, xhr.statusText);
                 }
             };
-        };
+        }
 
-        onload();
+        // 생성 기능 : 유효성 검사, 추가 후 바로 렌더링, 입력창 클리어
+        function createPost() {
+            // 유효성 검사
+            const id = document.getElementById("inputId").value;
+            const title = document.getElementById("inputTitle").value;
+            const view = document.getElementById("inputView").value;
+            if (!id || !title || !view) {
+                console.log("모든 요소를 입력해주세요");
+                alert("모든 요소를 입력해주세요.")
+                return;
+            }
 
-        const result = getData("posts");
-        console.log(result); // 비동기라서 undefined - promise사용(promise 간단히 -> fetch(또한 비동기) -> async,await)
+            const xhr = new XMLHttpRequest(); // 객체 생성
+            xhr.open("POST", url + "posts"); // 준비
+            // 컨텐트 타입 (:charset=UTF-8)
+            xhr.setRequestHeader("content-type", "application/json:charset=UTF-8"); // 컨텐트 타입
 
+            const newData = { id: id, title: title, views: view };
+
+            // 생성할 데이터 -> json으로 변환
+            xhr.send(JSON.stringify(newData)); // 요청
+            xhr.onload = () => {
+                // 응답 오면 실행할 함수
+                if (xhr.status === 201) {
+                    // 성공시 출력
+                    const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+                    getPost();
+                    formClear();
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        }
+        // 수정 기능 : 수정 후 바로 렌더링?
+        function updatePost() {
+            const id = document.getElementById("inputId").value;
+            const title = document.getElementById("inputTitle").value;
+            const view = document.getElementById("inputView").value;
+
+            if (!id) {
+                console.log("수정할 게시물의 id를 입력해주세요");
+                alert("수정할 게시물의 id를 입력해주세요.")
+                return;
+            } else if (!title || !view) {
+                console.log("수정할 내용을 모두 입력해주세요.");
+                alert("수정할 내용을 모두 입력해주세요.");
+                return;
+            }
+
+            const xhr = new XMLHttpRequest(); // 객체 생성
+            xhr.open("PUT", url + `posts/${id}`); // 준비
+            // 컨텐트 타입 (:charset=UTF-8)
+            xhr.setRequestHeader("content-type", "application/json:charset=UTF-8"); // 컨텐트 타입
+
+            const newData = { title: title, views: view };
+
+            // 수정할 데이터 -> json으로 변환
+            xhr.send(JSON.stringify(newData)); // 요청
+            xhr.onload = () => {
+                // 응답 오면 실행할 함수
+                if (xhr.status === 200) {
+                    // 성공시 출력
+                    const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+                    getPost();
+                    formClear();
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        }
+        // 삭제 기능 : 유효성 검사, 바로 렌더링
+        const deletePost = () => {
+            const id = document.getElementById("inputId").value;
+            if (!id) {
+                console.log("삭제할 게시물의 id를 입력해주세요.");
+                alert("삭제할 게시물의 id를 입력해주세요.");
+                return;
+            }
+
+            const xhr = new XMLHttpRequest(); // 객체 생성
+            xhr.open("DELETE", url + `posts/${id}`); // 준비
+            // 컨텐트 타입 (:charset=UTF-8)
+            xhr.setRequestHeader("content-type", "application/json:charset=UTF-8"); // 컨텐트 타입
+
+            xhr.send(); // 요청
+            xhr.onload = () => {
+                // 응답 오면 실행할 함수
+                if (xhr.status === 200) {
+                    // 성공시 출력
+                    const result = JSON.parse(xhr.response); // json 문자열로 응답옴
+                    getPost();
+                    formClear();
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            };
+        }
+
+        // 렌더링 : push, join => text, table, ul....
+        function rendering(posts) {
+            let postList = [];
+
+            for (let post of posts) {
+                let id = post["id"];
+                let title = post["title"];
+                let views = post["views"];
+                postList.push(
+                    `<tr><td>${id}</td><td>${title}</td><td>${views}</td></tr>`
+                );
+            }
+
+            //3. join()
+            let trTags = postList.join("");
+            if (trTags.length === 0) {
+                trTags = `<tr><td>조회된 결과가 없습니다.</td></tr>`;
+            }
+
+            //4. 랜더링해서 화면에 뿌리기
+            document.getElementById("loadBody").innerHTML = trTags;
+        }
+
+        // 입력창 clear
+        function formClear() {
+            document.getElementById("inputId").value = "";
+            document.getElementById("inputTitle").value = "";
+            document.getElementById("inputView").value = null;
+        }
     </script>
 </body>
 
