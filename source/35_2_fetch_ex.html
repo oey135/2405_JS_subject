@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동아리 신청하기</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: #f5f5fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: #ffffff;
+            padding: 40px 32px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(30, 20, 80, 0.08);
+        }
+
+        .header {
+            margin-bottom: 32px;
+        }
+
+        .header .tag {
+            display: inline-block;
+            background: #f0edff;
+            color: #7055e8;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #222233;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #9292a3;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: #333344;
+            margin-bottom: 10px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px;
+            border: 1px solid #e5e5ed;
+            border-radius: 10px;
+            background: #fafafe;
+            font-size: 14px;
+            color: #333344;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #b5b5c2;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #8065ee;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(128, 101, 238, 0.12);
+        }
+
+        button {
+            width: 100%;
+            height: 54px;
+            border: none;
+            border-radius: 10px;
+            background: #7659e8;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background: #6244d4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(118, 89, 232, 0.25);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #aaaaB8;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 32px 24px;
+            }
+
+            h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <span class="tag">CLUB APPLICATION</span>
+            <h2>동아리 신청하기</h2>
+            <p class="description">
+                관심 있는 동아리를 선택하고<br>
+                나만의 새로운 활동을 시작해 보세요!
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label for="student_name">학생 이름</label>
+            <input type="text" name="student_name" id="student_name" placeholder="이름을 입력하세요">
+        </div>
+
+        <div class="form-group">
+            <label for="club_select">동아리 선택</label>
+            <select name="club_select" id="club_select">
+            </select>
+        </div>
+
+        <button id="applyBtn">신청 제출하기 →</button>
+
+        <p class="footer">
+            CLUB APPLICATION · JOIN US
+        </p>
+
+    </div>
+
+    <script>
+        // id 갖고오기
+        const studentName = document.getElementById("studnet_name").innerHTML;
+        const clubSelect = document.getElementById("club_select").innerHTML;
+        const applyBtn = document.getElementById("applyBtn").innerHTML;
+
+
+    </script>
+
+</body>
+
+</html>

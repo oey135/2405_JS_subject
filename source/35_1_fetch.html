@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>35-1. fetch</title>
+</head>
+
+<body>
+    <div>
+        <button id="get_btn">조회</button>
+        <button id="post_btn">생성</button>
+        <button id="put_btn">수정</button>
+        <button id="delete_btn">삭제</button>
+    </div>
+    <script>
+        // fetch API
+        // fetch(url, 생성-수정-삭제 시 옵션 객체).then(response => response.json()).then(json => 렌더링 함수)
+        // 물리적인 에러말고는 에러로 보지 않음, 인터넷 에러는 try-catch로 해야함
+        // .then(response => response.json())은 정해진 문법
+
+        // 1. 조회
+        function getData(url) {
+            // 조회 시 옵션은 생략해도 OK
+            fetch("http://localhost:3000/" + url)
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+        }
+
+        // 2. 생성
+        function postData(url) {
+            const newData = { title: "2학년 4반", view: 5000 };
+            fetch("http://localhost:3000/" + url, {
+                method: "POST",
+                body: JSON.stringify(newData),
+                headers: { "content-type": "application/json" },
+            })
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+        }
+
+        // 3. 수정
+        function putData(url) {
+            const updateData = {
+                title: "2학년 4반",
+                view: 250000,
+            };
+            fetch("http://localhost:3000/" + url + "/pqV2sOaEY5M", {
+                method: "PUT",
+                body: JSON.stringify(updateData),
+                headers: { "content-type": "application/json" },
+            })
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+        }
+
+        // 4. 삭제
+        function deleteData(url) {
+            fetch("http://localhost:3000/" + url + "/ExXFXC89JeE", {
+                method: "DELETE",
+            })
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+        }
+
+        // 이벤트 핸들러
+        document
+            .getElementById("get_btn")
+            .addEventListener("click", () => getData("posts"));
+        document
+            .getElementById("post_btn")
+            .addEventListener("click", () => postData("posts"));
+        document
+            .getElementById("put_btn")
+            .addEventListener("click", () => putData("posts"));
+        document
+            .getElementById("delete_btn")
+            .addEventListener("click", () => deleteData("posts"));
+    </script>
+</body>
+
+</html>

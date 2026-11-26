@@ -1,0 +1,28 @@
+{
+  "clubs": [
+    {
+      "id": "1",
+      "name": "캘리그라피반"
+    },
+    {
+      "id": "2",
+      "name": "축구반"
+    },
+    {
+      "id": "3",
+      "name": "서예반"
+    },
+    {
+      "id": "4",
+      "name": "앱반"
+    },
+    {
+      "id": "5",
+      "name": "자바"
+    }
+  ],
+  "clubs_add" : [
+    
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
